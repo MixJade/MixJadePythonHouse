@@ -1,9 +1,9 @@
 import tensorflow as tf
 
 """
-教材(深度学习之美)上所使用的tensorflow十分的古老
-其版本是Python-3.6,tensorflow-1.7,是四年前代码,许多api现已不支持
-甚至不能从官网上找到当时的版本,不得以用最新的框架技术
+教材(深度学习之美)上所使用的tensorflow十分的古老,
+其版本是Python-3.6,tensorflow-1.7,
+许多api现已不支持,而我们要拥抱新技术
 
 当前版本:python-3.9,tensorflow-2.9
 """
@@ -37,7 +37,7 @@ model.add(tf.keras.layers.Dense(10))  # 最后输出10个数
 model.compile(optimizer='adam',  # Adam优化器
               loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),  # 损失函数
               metrics=['accuracy'])  # 监控指标:精度
-# 开始训练,训练周期5,即将所有训练样本(6万个),遍历五遍,因为输入通道是32个，所以每遍训练1875次
+# 开始训练,训练周期5,即将所有训练样本(6万个),遍历五遍,因为输入通道是32个,所以每遍训练1875次,每次32个
 model.fit(train_images, train_labels, epochs=5, validation_data=(test_images, test_labels))
 
 # 训练完毕，使用测试集来评估模型精度
