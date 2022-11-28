@@ -37,9 +37,12 @@ model.add(tf.keras.layers.Dense(10))  # 最后输出10个数
 model.compile(optimizer='adam',  # Adam优化器
               loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),  # 损失函数
               metrics=['accuracy'])  # 监控指标:精度
-# 开始训练,训练周期5,即将所有训练样本(6万个),遍历五遍,因为输入通道是32个,所以每遍训练1875次,每次32个
-model.fit(train_images, train_labels, epochs=5, validation_data=(test_images, test_labels))
+# 开始训练,训练周期8,即将所有训练样本(6万个),遍历八遍,因为输入通道是32个,所以每遍训练1875次,每次32个
+model.fit(train_images, train_labels, epochs=8, validation_data=(test_images, test_labels))
 
 # 训练完毕，使用测试集来评估模型精度
 test_loss, test_acc = model.evaluate(test_images, test_labels, verbose=2)
 print('\n最终测试集上的精度为:', test_acc)
+
+# 保存模型
+model.save( "../兼收并蓄/CNN模型")  # 这是自定义的路径,删除"/兼收并蓄"即可直接运行
