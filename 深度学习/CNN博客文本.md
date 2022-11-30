@@ -9,6 +9,7 @@
 1. [MINIST数据集](#MINIST数据集)
 2. [训练CNN卷积神经网络](#训练CNN卷积神经网络)
 3. [使用训练好的模型进行预测](#使用训练好的模型进行预测)
+4. [识别自己手写的数字](#识别自己手写的数字)
 
 写这篇文章为了讲一个故事：
 
@@ -165,5 +166,38 @@ print("所预测的标签为:", predictions_num)
 ```
 
 **运行结果**：（可以看到训练20个图像，全部都预测对了）
+
+---
+
+## 识别自己手写的数字
+
+> 好不容易训练的模型，应该自己体验一番，自己画一个数字，看看是否能够识别
+
+* 首先打开画图，将图像设置为28x28的黑白图像（打开画图-->文件-->图像属性）（其实不设也行，但那样不能保证精度）
+* 然后画一个黑底白字的数字，保存为png文件（我这里起名“御笔亲题之作”）
+* （这个时候可能看不清画布，用画图的放大镜点几下就好了）
+* 然后通过tf.io进行读取，并转化成numpy数组
+
+代码：
+
+```python
+import tensorflow as tf
+
+# 读取一张自己手写的图片，并将之转化成28x28的numpy数组
+img_01 = tf.io.read_file("../兼收并蓄/御笔亲题之作.png")  # 要黑白图片
+img02 = tf.io.decode_png(img_01, channels=1)  # 图像通道为1,读取黑白图片
+img03 = tf.image.resize(img02, [28, 28])  # 保险起见,将图片大小强行变成28x28
+img = (img03.numpy()).reshape([1, 28, 28])  # 转化成28x28的numpy数组
+print("图片转化之后的形状为:", img.shape)
+# 运用模型进行预测
+model = tf.keras.models.load_model("../兼收并蓄/CNN模型")
+predictions = model.predict(img)
+predictions_num = tf.argmax(predictions, 1)
+print("你的模型认为该数字为:", predictions_num.numpy())
+
+```
+
+运行结果:
+你的模型认为该数字为: [7]
 
 ---
