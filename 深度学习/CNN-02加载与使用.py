@@ -3,11 +3,11 @@ import tensorflow as tf
 # 导入数据集
 mnist = tf.keras.datasets.mnist
 (train_images, train_labels), (test_images, test_labels) = mnist.load_data()
-# 引入模型
-model = tf.keras.models.load_model("../兼收并蓄/CNN模型")
 # 加入待预测的图像及其标签
 show_images, show_labels = test_images[0:20], test_labels[0:20]
 print("所选取的测试集图片的标签is:", show_labels)
+# 引入模型
+model = tf.keras.models.load_model("../兼收并蓄/CNN模型")
 # 开始预测
 predictions = model.predict(show_images)
 # 预测完成,预测结果是类似独热编码的形式(10个标签的概率)
