@@ -70,6 +70,7 @@ class Student:
 def add(stulist01, stu):
     """
     添加一个学生
+
     :param stulist01: 学生列表
     :param stu: 单个学生
     """
